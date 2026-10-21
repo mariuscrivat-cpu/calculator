@@ -4,7 +4,5 @@
 - Toate modificările și fișierele create trebuie să rămână în interiorul acestui proiect.
 
 # Reguli Workflow Git
-- După ce creezi sau modifici codul și testele trec, execută automat:
-  git add .
-  git commit -m "feat: [ID_TICHET] descriere sumară"
-  git push origin main
+- NU rula comenzi git (add, commit, push, checkout, branch). Orchestratorul se ocupă de git.
+- Tu doar modifici fișierele și rulezi testele.
