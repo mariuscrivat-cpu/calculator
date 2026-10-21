@@ -1,6 +1,32 @@
 import unittest
 
-from calculator import divide, multiply
+from calculator import adunare, divide, multiply, scadere
+
+
+class TestAdunare(unittest.TestCase):
+    def test_positive(self):
+        self.assertEqual(adunare(3, 4), 7)
+
+    def test_negative(self):
+        self.assertEqual(adunare(-3, 4), 1)
+        self.assertEqual(adunare(-3, -4), -7)
+
+    def test_floats(self):
+        self.assertAlmostEqual(adunare(0.1, 0.2), 0.3)
+
+
+class TestScadere(unittest.TestCase):
+    def test_positive(self):
+        self.assertEqual(scadere(10, 4), 6)
+
+    def test_negative_result(self):
+        self.assertEqual(scadere(4, 10), -6)
+
+    def test_negative_operands(self):
+        self.assertEqual(scadere(-3, -4), 1)
+
+    def test_floats(self):
+        self.assertAlmostEqual(scadere(0.3, 0.1), 0.2)
 
 
 class TestMultiply(unittest.TestCase):
