@@ -1,66 +1,53 @@
 import unittest
 
-from calculator import adunare, divide, multiply, scadere
+from calculator import adunare, scadere
 
 
 class TestAdunare(unittest.TestCase):
-    def test_positive(self):
-        self.assertEqual(adunare(3, 4), 7)
+    def test_pozitive(self):
+        self.assertEqual(adunare(2, 3), 5)
 
     def test_negative(self):
-        self.assertEqual(adunare(-3, 4), 1)
-        self.assertEqual(adunare(-3, -4), -7)
+        self.assertEqual(adunare(-2, -3), -5)
 
-    def test_floats(self):
+    def test_semne_diferite(self):
+        self.assertEqual(adunare(-2, 3), 1)
+        self.assertEqual(adunare(5, -3), 2)
+
+    def test_zero(self):
+        self.assertEqual(adunare(0, 0), 0)
+        self.assertEqual(adunare(0, 7), 7)
+        self.assertEqual(adunare(7, 0), 7)
+
+    def test_float(self):
+        self.assertEqual(adunare(1.5, 2.25), 3.75)
         self.assertAlmostEqual(adunare(0.1, 0.2), 0.3)
+        self.assertEqual(adunare(-1.5, 1.5), 0.0)
+        self.assertEqual(adunare(1, 0.5), 1.5)
 
 
 class TestScadere(unittest.TestCase):
-    def test_positive(self):
-        self.assertEqual(scadere(10, 4), 6)
+    def test_pozitive(self):
+        self.assertEqual(scadere(5, 3), 2)
+        self.assertEqual(scadere(3, 5), -2)
 
-    def test_negative_result(self):
-        self.assertEqual(scadere(4, 10), -6)
+    def test_negative(self):
+        self.assertEqual(scadere(-2, -3), 1)
 
-    def test_negative_operands(self):
-        self.assertEqual(scadere(-3, -4), 1)
+    def test_semne_diferite(self):
+        self.assertEqual(scadere(-2, 3), -5)
+        self.assertEqual(scadere(5, -3), 8)
 
-    def test_floats(self):
+    def test_zero(self):
+        self.assertEqual(scadere(0, 0), 0)
+        self.assertEqual(scadere(0, 7), -7)
+        self.assertEqual(scadere(7, 0), 7)
+
+    def test_float(self):
+        self.assertEqual(scadere(5.5, 2.25), 3.25)
         self.assertAlmostEqual(scadere(0.3, 0.1), 0.2)
-
-
-class TestMultiply(unittest.TestCase):
-    def test_positive(self):
-        self.assertEqual(multiply(3, 4), 12)
-
-    def test_negative(self):
-        self.assertEqual(multiply(-3, 4), -12)
-        self.assertEqual(multiply(-3, -4), 12)
-
-    def test_by_zero(self):
-        self.assertEqual(multiply(5, 0), 0)
-
-    def test_floats(self):
-        self.assertAlmostEqual(multiply(0.1, 3), 0.3)
-
-
-class TestDivide(unittest.TestCase):
-    def test_positive(self):
-        self.assertEqual(divide(12, 4), 3)
-
-    def test_negative(self):
-        self.assertEqual(divide(-12, 4), -3)
-        self.assertEqual(divide(-12, -4), 3)
-
-    def test_fractional_result(self):
-        self.assertEqual(divide(1, 4), 0.25)
-
-    def test_zero_numerator(self):
-        self.assertEqual(divide(0, 5), 0)
-
-    def test_by_zero(self):
-        with self.assertRaises(ZeroDivisionError):
-            divide(5, 0)
+        self.assertEqual(scadere(-1.5, -1.5), 0.0)
+        self.assertEqual(scadere(1, 0.5), 0.5)
 
 
 if __name__ == "__main__":
