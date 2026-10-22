@@ -1,6 +1,6 @@
 import unittest
 
-from calculator import adunare, scadere
+from calculator import adunare, divide, multiply, scadere
 
 
 class TestAdunare(unittest.TestCase):
@@ -48,6 +48,51 @@ class TestScadere(unittest.TestCase):
         self.assertAlmostEqual(scadere(0.3, 0.1), 0.2)
         self.assertEqual(scadere(-1.5, -1.5), 0.0)
         self.assertEqual(scadere(1, 0.5), 0.5)
+
+
+class TestMultiply(unittest.TestCase):
+    def test_pozitive(self):
+        self.assertEqual(multiply(2, 3), 6)
+
+    def test_negative(self):
+        self.assertEqual(multiply(-2, -3), 6)
+        self.assertEqual(multiply(-2, 3), -6)
+
+    def test_zero(self):
+        self.assertEqual(multiply(0, 7), 0)
+        self.assertEqual(multiply(7, 0), 0)
+        self.assertEqual(multiply(0, 0), 0)
+
+    def test_float(self):
+        self.assertEqual(multiply(1.5, 2), 3.0)
+        self.assertAlmostEqual(multiply(0.1, 3), 0.3)
+        self.assertAlmostEqual(multiply(-1.5, 0.5), -0.75)
+
+
+class TestDivide(unittest.TestCase):
+    def test_pozitive(self):
+        self.assertEqual(divide(6, 3), 2)
+        self.assertEqual(divide(1, 4), 0.25)
+
+    def test_negative(self):
+        self.assertEqual(divide(-6, -3), 2)
+        self.assertEqual(divide(-6, 3), -2)
+        self.assertEqual(divide(6, -3), -2)
+
+    def test_deimpartit_zero(self):
+        self.assertEqual(divide(0, 5), 0)
+        self.assertEqual(divide(0, -5), 0)
+
+    def test_float(self):
+        self.assertEqual(divide(7.5, 2.5), 3.0)
+        self.assertAlmostEqual(divide(1, 3), 0.3333333333)
+        self.assertAlmostEqual(divide(0.3, 0.1), 3.0)
+
+    def test_impartire_la_zero(self):
+        with self.assertRaises(ZeroDivisionError):
+            divide(5, 0)
+        with self.assertRaises(ZeroDivisionError):
+            divide(0, 0)
 
 
 class TestExempleTichet(unittest.TestCase):
