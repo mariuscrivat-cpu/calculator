@@ -14,3 +14,7 @@ def divide(a, b):
     if b == 0:
         raise ZeroDivisionError("Împărțirea la zero nu este permisă")
     return a / b
+
+
+def putere(a, b):
+    return a ** b
