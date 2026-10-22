@@ -50,5 +50,16 @@ class TestScadere(unittest.TestCase):
         self.assertEqual(scadere(1, 0.5), 0.5)
 
 
+class TestExempleTichet(unittest.TestCase):
+    def test_adunare_opuse(self):
+        self.assertEqual(adunare(-1, 1), 0)
+
+    def test_scadere_rezultat_zero(self):
+        self.assertEqual(scadere(4, 4), 0)
+
+    def test_scadere_float_aproximativ(self):
+        self.assertAlmostEqual(scadere(0.5, 0.2), 0.3)
+
+
 if __name__ == "__main__":
     unittest.main()
