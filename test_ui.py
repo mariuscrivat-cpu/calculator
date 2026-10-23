@@ -11,23 +11,29 @@ def read(name):
 
 
 class TestUI(unittest.TestCase):
-    def test_fisiere_exista(self):
-        for name in ("index.html", "style.css", "script.js"):
-            self.assertTrue(os.path.isfile(os.path.join(WEB, name)), name)
+    def test_fara_css_js_custom(self):
+        self.assertEqual(os.listdir(WEB), ["index.html"])
 
     def test_ecran(self):
         self.assertIn('id="display"', read("index.html"))
 
     def test_butoane(self):
         html = read("index.html")
-        keys = set(re.findall(r'data-key="([^"]+)"', html))
-        expected = set("0123456789") | {".", "+", "−", "×", "÷", "=", "C"}
+        keys = set(re.findall(r"'([^']+)'", re.search(r"x-for=\"k in \[([^\]]+)\]", html).group(1)))
+        expected = set("0123456789") | {".", "+", "\u2212", "\u00d7", "\u00f7", "=", "C"}
         self.assertTrue(expected <= keys, expected - keys)
 
-    def test_referinte_css_js(self):
+    def test_librarii_externe(self):
         html = read("index.html")
-        self.assertIn("style.css", html)
-        self.assertIn("script.js", html)
+        for lib in ("bootstrap", "alpinejs", "mathjs"):
+            self.assertRegex(html, r"https://cdn\.jsdelivr\.net/npm/%s@" % lib)
+        self.assertIn("/eel.js", html)
+
+    def test_fara_referinte_locale_css_js(self):
+        html = read("index.html")
+        self.assertNotIn("style.css", html)
+        self.assertNotIn("script.js", html)
+        self.assertNotIn("<style", html)
 
 
 if __name__ == "__main__":
