@@ -4,6 +4,8 @@ import unittest
 
 from config import ENV_FILE, load_config
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 class TestConfig(unittest.TestCase):
     def test_valori_implicite(self):
@@ -26,7 +28,7 @@ class TestConfig(unittest.TestCase):
         self.assertFalse(hasattr(config, "parse_env_file"))
 
     def test_python_dotenv_in_requirements(self):
-        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "requirements.txt")
+        path = os.path.join(ROOT, "requirements.txt")
         with open(path) as f:
             self.assertIn("python-dotenv", f.read())
 

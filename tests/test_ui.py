@@ -2,7 +2,7 @@ import os
 import re
 import unittest
 
-WEB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
+WEB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "web")
 
 
 def read(name):
