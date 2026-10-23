@@ -1,6 +1,6 @@
 import unittest
 
-from calculator import adunare, divide, multiply, scadere
+from calculator import adunare, divide, multiply, putere, scadere
 
 
 class TestAdunare(unittest.TestCase):
@@ -93,6 +93,20 @@ class TestDivide(unittest.TestCase):
             divide(5, 0)
         with self.assertRaises(ZeroDivisionError):
             divide(0, 0)
+
+
+class TestPutere(unittest.TestCase):
+    def test_simplu(self):
+        self.assertEqual(putere(2, 3), 8)
+        self.assertEqual(putere(5, 1), 5)
+
+    def test_exponent_zero(self):
+        self.assertEqual(putere(5, 0), 1)
+        self.assertEqual(putere(-3, 0), 1)
+
+    def test_exponent_negativ(self):
+        self.assertEqual(putere(2, -1), 0.5)
+        self.assertEqual(putere(2, -2), 0.25)
 
 
 class TestExempleTichet(unittest.TestCase):
