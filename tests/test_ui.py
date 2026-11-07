@@ -11,8 +11,15 @@ def read(name):
 
 
 class TestUI(unittest.TestCase):
-    def test_fara_css_js_custom(self):
-        self.assertEqual(os.listdir(WEB), ["index.html"])
+    def test_doar_css_extern_custom(self):
+        self.assertEqual(sorted(os.listdir(WEB)), ["index.html", "style.css"])
+
+    def test_fundal_galben_ecran(self):
+        css = read("style.css")
+        rule = re.search(r"#display\s*\{([^}]*)\}", css).group(1)
+        self.assertRegex(rule, r"background-color:\s*#ffeb3b")
+        self.assertIn("color:", rule.replace("background-color", ""))
+        self.assertIn('href="/style.css"', read("index.html"))
 
     def test_ecran(self):
         self.assertIn('id="display"', read("index.html"))
@@ -31,9 +38,9 @@ class TestUI(unittest.TestCase):
 
     def test_fara_referinte_locale_css_js(self):
         html = read("index.html")
-        self.assertNotIn("style.css", html)
         self.assertNotIn("script.js", html)
         self.assertNotIn("<style", html)
+        self.assertNotIn("background", html)
 
 
 if __name__ == "__main__":
